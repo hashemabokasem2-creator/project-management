@@ -20,7 +20,7 @@ import {
 import { useContext } from "react";
 import ProjectContext from "./ProjectContext";
 
-function Sectionone() {
+function Sectionone({ onSelectProject }) {
   const [showModal, setShowModal] = useState(false);
   const {
     projects,
@@ -123,14 +123,20 @@ function Sectionone() {
         <Row className="g-3">
           {projects.map((project) => (
             <Col key={project.id} md={6} lg={4}>
-              <Card className="shadow-sm border-0 h-100 position-relative border-top-custom">
+              <Card
+                className="shadow-sm border-0 h-100 position-relative border-top-custom"
+                onClick={() => onSelectProject(project.id)}
+              >
                 <Card.Body className="d-flex flex-column justify-content-between p-3">
                   <div>
                     <div className="d-flex justify-content-between align-items-start mb-2">
                       <h6 className="fw-bold m-0 text-dark">{project.title}</h6>
                       <BsTrash
                         className="text-danger cursor-pointer fs-5"
-                        onClick={() => handleDeleteProject(project.id)}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleDeleteProject(project.id);
+                        }}
                       />
                     </div>
 
@@ -147,22 +153,6 @@ function Sectionone() {
                         <BsPeople className="me-1" /> عضو {project.membersCount}
                       </span>
                     </div>
-
-                    {/* <div className="d-flex gap-1 mb-3">
-                      {project.membersLetters?.map((letter, idx) => (
-                        <span
-                          key={idx}
-                          className="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center small fw-bold"
-                          style={{
-                            width: "28px",
-                            height: "28px",
-                            fontSize: "12px",
-                          }}
-                        >
-                          {letter}
-                        </span>
-                      ))}
-                    </div> */}
                     <div className="d-flex gap-1 mb-3">
                       {project.membersLetters?.map((letter, idx) => (
                         <span
