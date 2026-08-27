@@ -1,0 +1,16 @@
+.custom-nav-item {
+  transition: all 0.2s ease !important;
+  opacity: 0.85;
+  text-decoration: none;
+}
+
+.custom-nav-item:hover {
+  background-color: rgba(255, 255, 255, 0.15) !important;
+  opacity: 1;
+}
+
+.custom-nav-item.active {
+  background-color: rgba(255, 255, 255, 0.25) !important;
+  opacity: 1;
+  font-weight: 600;
+}
