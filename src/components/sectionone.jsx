@@ -59,6 +59,7 @@ function Sectionone({ onSelectProject }) {
       title: formData.title,
       description: formData.description,
       membersCount: namesArray.length,
+      membersList: namesArray,
       membersLetters: membersLetters,
       color: formData.color,
     });
