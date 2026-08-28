@@ -160,6 +160,13 @@ const ProjectProvider = ({ children }) => {
       }),
     );
   };
+
+  const upcomingTasks = projects.flatMap((project) =>
+    (project.tasks || [])
+      .filter((task) => task.status === "todo")
+      .map((task) => ({ ...task, projectTitle: project.title })),
+  );
+
   const value = {
     projects,
     totalTasksCount,
@@ -172,6 +179,7 @@ const ProjectProvider = ({ children }) => {
     deleteTask,
     addComment,
     attachFile,
+    upcomingTasks,
   };
 
   return (

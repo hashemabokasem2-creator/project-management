@@ -7,6 +7,7 @@ import {
   Button,
   Modal,
   Form,
+  Badge,
 } from "react-bootstrap";
 import { useState } from "react";
 import {
@@ -29,6 +30,7 @@ function Sectionone({ onSelectProject }) {
     inProgressCount,
     handleDeleteProject,
     handleAddProject,
+    upcomingTasks,
   } = useContext(ProjectContext);
 
   const [formData, setFormData] = useState({
@@ -72,6 +74,7 @@ function Sectionone({ onSelectProject }) {
     });
     setShowModal(false);
   };
+
   return (
     <>
       <Container className="py-4 px-4 bg-light">
@@ -185,6 +188,42 @@ function Sectionone({ onSelectProject }) {
               </Card>
             </Col>
           ))}
+        </Row>
+        <Row className="mt-4">
+          <Col xs={12}>
+            <h5 className="fw-bold mb-3">المهام القادمة</h5>
+
+            {upcomingTasks.length === 0 ? (
+              <div className="text-center text-muted py-4 fw-normal">
+                لا يوجد مهام قيد الانتظار
+              </div>
+            ) : (
+              upcomingTasks.map((task) => (
+                <Card key={task.id} className="border-0 shadow-sm mb-2">
+                  <Card.Body className="d-flex align-items-center justify-content-between py-2 px-3">
+                    <div>
+                      <h6 className="fw-bold m-0 small">{task.title}</h6>
+                      <span className="text-muted extra-small">
+                        {task.dueDate} • {task.projectTitle}
+                      </span>
+                    </div>
+                    <Badge
+                      bg={
+                        task.priority === "عالي"
+                          ? "danger"
+                          : task.priority === "متوسط"
+                            ? "warning"
+                            : "secondary"
+                      }
+                      className="fw-normal"
+                    >
+                      {task.priority}
+                    </Badge>
+                  </Card.Body>
+                </Card>
+              ))
+            )}
+          </Col>
         </Row>
         <Modal
           show={showModal}

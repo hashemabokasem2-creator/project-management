@@ -1,5 +1,15 @@
 import { useState, useContext, useRef } from "react";
-import { Container, Row, Col, Button, Nav, Modal, Form } from "react-bootstrap";
+import {
+  Container,
+  Row,
+  Col,
+  Button,
+  Nav,
+  Modal,
+  Form,
+  Badge,
+  Card,
+} from "react-bootstrap";
 import ProjectContext from "../components/ProjectContext.jsx";
 import {
   BsArrowLeft,
@@ -429,7 +439,42 @@ function ProjectDetails({ project, onBack }) {
               </Col>
             </Row>
           ) : (
-            <div>{/* هنا سنبني قائمة التقويم */}</div>
+            <Row className="mt-4">
+              <Col xs={12}>
+                <h5 className="fw-bold mb-3">المهام القادمة</h5>
+
+                {todoTasks.length === 0 ? (
+                  <div className="text-center text-muted py-4 fw-normal">
+                    لا يوجد مهام قيد الانتظار
+                  </div>
+                ) : (
+                  todoTasks.map((task) => (
+                    <Card key={task.id} className="border-0 shadow-sm mb-2">
+                      <Card.Body className="d-flex align-items-center justify-content-between py-2 px-3">
+                        <div>
+                          <h6 className="fw-bold m-0 small">{task.title}</h6>
+                          <span className="text-muted extra-small">
+                            {task.dueDate} • {task.projectTitle}
+                          </span>
+                        </div>
+                        <Badge
+                          bg={
+                            task.priority === "عالي"
+                              ? "danger"
+                              : task.priority === "متوسط"
+                                ? "warning"
+                                : "secondary"
+                          }
+                          className="fw-normal"
+                        >
+                          {task.priority}
+                        </Badge>
+                      </Card.Body>
+                    </Card>
+                  ))
+                )}
+              </Col>
+            </Row>
           )}
           <input
             type="file"
