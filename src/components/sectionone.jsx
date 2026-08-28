@@ -148,7 +148,11 @@ function Sectionone({ onSelectProject }) {
                     <div className="d-flex gap-2 mb-3">
                       <span className="badge bg-light text-dark border fw-normal px-2 py-1">
                         <BsClipboardCheck className="me-1" /> مهمة{" "}
-                        {project.tasksCount}
+                        {(project.tasks?.filter((t) => t.status === "todo")
+                          .length || 0) +
+                          (project.tasks?.filter(
+                            (t) => t.status === "inProgress",
+                          ).length || 0)}
                       </span>
                       <span className="badge bg-light text-dark border fw-normal px-2 py-1">
                         <BsPeople className="me-1" /> عضو {project.membersCount}

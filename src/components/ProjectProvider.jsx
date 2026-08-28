@@ -46,10 +46,22 @@ const ProjectProvider = ({ children }) => {
     },
   ]);
 
-  const [totalTasksCount, setTotalTasksCount] = useState(0);
-  const [completedCount, setCompletedCount] = useState(0);
-  const [inProgressCount, setInProgressCount] = useState(0);
+  const totalTasksCount = projects.reduce(
+    (acc, p) => acc + (p.tasks?.length || 0),
+    0,
+  );
 
+  const completedCount = projects.reduce(
+    (acc, p) =>
+      acc + (p.tasks?.filter((t) => t.status === "completed").length || 0),
+    0,
+  );
+
+  const inProgressCount = projects.reduce(
+    (acc, p) =>
+      acc + (p.tasks?.filter((t) => t.status === "inProgress").length || 0),
+    0,
+  );
   const handleDeleteProject = (id) => {
     setProjects((prev) => prev.filter((project) => project.id !== id));
   };

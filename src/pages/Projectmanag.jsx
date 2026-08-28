@@ -1,7 +1,7 @@
 import Sectionone from "../components/sectionone.jsx";
 import { useState, useContext } from "react";
 import ProjectDetails from "../components/ProjectDetails.jsx";
-import  ProjectContext  from "../components/ProjectContext.jsx";
+import ProjectContext from "../components/ProjectContext.jsx";
 
 function Projectmanag() {
   const { projects } = useContext(ProjectContext);
